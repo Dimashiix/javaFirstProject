@@ -15,7 +15,7 @@ public class Main {
         }
 
         public String getOrderDetails() {
-            return "Название работы: " + title + "\nОписание: " + description + "\nОплата: $" + payment;
+            return "Name of order: " + title + "\nDescription: " + description + "\nPayment: $" + payment;
         }
     }
 
@@ -30,21 +30,21 @@ public class Main {
     }
 
     static ArrayList<User> users = new ArrayList<>();
-    static ArrayList<Order> jobs = new ArrayList<>();
+    static ArrayList<Order> orders = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         boolean running = true;
 
-        System.out.println("Добро пожаловать в FreelanceJob!");
+        System.out.println("Welcome to FreelanceJob!");
 
         while (running) {
-            System.out.println("\n1. Регистрация");
-            System.out.println("2. Вход");
-            System.out.println("3. Добавить заказ");
-            System.out.println("4. Посмотреть заказы");
-            System.out.println("5. Выйти");
-            System.out.print("Выберите нужный пункт: ");
+            System.out.println("\n1. Registration");
+            System.out.println("2. Login");
+            System.out.println("3. Add order");
+            System.out.println("4. View orders");
+            System.out.println("5. Exit");
+            System.out.print("Select the desired item: ");
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // Clear the buffer
@@ -55,59 +55,59 @@ public class Main {
                 case 3 -> addOrder();
                 case 4 -> viewOrders();
                 case 5 -> {
-                    System.out.println("Спасибо за использование FreelanceJob!");
+                    System.out.println("Thank you for using FreelanceJob!");
                     running = false;
                 }
-                default -> System.out.println("Ошибка. Повторите попытку.");
+                default -> System.out.println("Error. Will try again.");
             }
         }
     }
 
     static void registerUser() {
-        System.out.print("Введите имя: ");
+        System.out.print("Enter your name: ");
         String username = scanner.nextLine();
-        System.out.print("Введите пароль: ");
+        System.out.print("Enter the password: ");
         String password = scanner.nextLine();
 
         users.add(new User(username, password));
-        System.out.println("Пользоователь зарегестрировалься успешно!");
+        System.out.println("The user has registered successfully!");
     }
 
     static void loginUser() {
-        System.out.print("Введите имя: ");
+        System.out.print("Enter your name: ");
         String username = scanner.nextLine();
-        System.out.print("Введите пароль: ");
+        System.out.print("Enter the password: ");
         String password = scanner.nextLine();
 
         for (User user : users) {
             if (user.username.equals(username) && user.password.equals(password)) {
-                System.out.println("Вход выполнен! Добро пожаловать, " + username + "!");
+                System.out.println("Login completed! Welcome, " + username + "!");
                 return;
             }
         }
-        System.out.println("Не подходящие реквизиты для входа. Повторите попытку.");
+        System.out.println("Inappropriate login details. Please try again.");
     }
 
     static void addOrder() {
-        System.out.print("Введите название заказа: ");
+        System.out.print("Enter order name: ");
         String title = scanner.nextLine();
-        System.out.print("Опишите заказ: ");
+        System.out.print("Describe your order: ");
         String description = scanner.nextLine();
-        System.out.print("Введите сумму оплаты: ");
+        System.out.print("Enter payment amount: ");
         double payment = scanner.nextDouble();
         scanner.nextLine(); // Clear the buffer
 
-        jobs.add(new Order(title, description, payment));
-        System.out.println("Работа добавлена успешно");
+        orders.add(new Order(title, description, payment));
+        System.out.println("Order added successfully");
     }
 
     static void viewOrders() {
-        if (jobs.isEmpty()) {
-            System.out.println("Нету заказов.");
+        if (orders.isEmpty()) {
+            System.out.println("No orders.");
         } else {
-            for (int i = 0; i < jobs.size(); i++) {
+            for (int i = 0; i < orders.size(); i++) {
                 System.out.println("\nOrder #" + (i + 1));
-                System.out.println(jobs.get(i).getOrderDetails());
+                System.out.println(orders.get(i).getOrderDetails());
             }
         }
     }
